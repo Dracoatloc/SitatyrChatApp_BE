@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.security.sasl.AuthenticationException;
 import javax.validation.constraints.Min;
 
 import org.apache.catalina.connector.Response;
@@ -14,13 +15,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.tec.web.project.manager.ContactsManager;
+import mx.tec.web.project.manager.LoginManager;
 import mx.tec.web.project.vo.ContactVO;
+import mx.tec.web.project.vo.CredentialsVO;
+import mx.tec.web.project.vo.JsonWebTokenVO;
 import mx.tec.web.project.vo.UserVO;
 
 @RestController
@@ -35,9 +42,13 @@ public class RequestController {
 	 */
 	@Resource
 	private ContactsManager contactsManager;
+	
+	
+	@Resource
+	private LoginManager loginManager;
 
 	/**
-	 * Get the contasts of a given user by the user_id
+	 * Get the contacts of a given user by the user_id
 	 * @param user_id
 	 * @return A list of Contact Value Objects
 	 */
@@ -48,10 +59,29 @@ public class RequestController {
 		return new ResponseEntity<>(contacts, HttpStatus.OK);
 	}
 
+
 	@GetMapping("/contacts")
 	public ResponseEntity<String> getTest() {
 		log.debug("GET a /api/contacts");	
 		return new ResponseEntity<>("Test GET to /api/contacts", HttpStatus.OK);
+	}
+	
+	/**
+	 * Authenticate to a session given user credentials
+	 * @param credentials Credentials of the user to be checked
+	 * @return Authentication of not
+	 */
+	@PostMapping("/user/login")
+	public ResponseEntity<JsonWebTokenVO> createAuthenticationToken(@RequestBody CredentialsVO credentials){
+		log.info("Authenticating user {}", credentials.getUsername());
+		return ResponseEntity.ok(loginManager.authenticate(credentials));
+	}
+	
+	@ExceptionHandler(AuthenticationException.class)
+	public ResponseEntity<String> onSecurityException (final AuthenticationException ae) {
+		log.error("Invalid Credentials ", ae);
+		return new ResponseEntity<>(ae.getMessage(), HttpStatus.UNAUTHORIZED);
+
 	}
 }
 
