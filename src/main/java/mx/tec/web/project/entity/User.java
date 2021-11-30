@@ -6,16 +6,15 @@ import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Entity Object for the database implementation of User
+ * @author Victor-Guerra
+ */
 @Entity
 public class User {
 	@Id
@@ -52,7 +51,6 @@ public class User {
 	@NotNull
 	private String status;
 
-	//@JoinTable(name = "Contacta", joinColumns = @JoinColumn(name = "user_id_Usuario"), inverseJoinColumns = @JoinColumn(name = "user_id_Contacto"))
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Contacta> contacts = new ArrayList<>();
 	
@@ -210,12 +208,19 @@ public class User {
 		this.status = status;
 	}
 
+	/**
+	 * Obtain the Hash code for the Object
+	 * @return int hash
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(age, birthDay, contacts, email, id, name, nationality, password, preferredMusic, status,
 				userImage, username);
 	}
 
+	/**
+	 * Compare two User Objects
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {

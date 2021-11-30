@@ -1,5 +1,9 @@
 package mx.tec.web.project.vo;
 
+/**
+ * Value Object for internal manipulation of Contact
+ * @author Victor-Guerra
+ */
 public class ContactVO {
 	private Long id;
 	private String email;

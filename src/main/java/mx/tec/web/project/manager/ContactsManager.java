@@ -1,6 +1,5 @@
 package mx.tec.web.project.manager;
 
-import java.util.Optional;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import mx.tec.web.project.dao.ContactsDAO;
 import mx.tec.web.project.vo.ContactVO;
-import mx.tec.web.project.vo.UserVO;
 
 /**
  * The Contacts Manager
@@ -29,7 +27,7 @@ public class ContactsManager {
      * @param userId
      * @return List of Long
      */
-    public List<Long> getContacts(Long userId) {
+    public List<ContactVO> getContacts(Long userId) {
         return contactsDAO.findContactsByUserId(userId);
     }
     

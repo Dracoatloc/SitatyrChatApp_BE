@@ -1,5 +1,9 @@
 package mx.tec.web.project.vo;
 
+/**
+ * Value Object implementation for internal manipulation of User
+ * @author Victor-Guerra
+ */
 public class UserVO {
 	private Long id;
 	private String email;
