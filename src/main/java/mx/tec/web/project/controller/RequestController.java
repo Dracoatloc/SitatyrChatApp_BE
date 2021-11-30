@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.constraints.Min;
 
+import org.apache.catalina.connector.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.ReadOnlyProperty;
@@ -23,7 +24,7 @@ import mx.tec.web.project.vo.ContactVO;
 import mx.tec.web.project.vo.UserVO;
 
 @RestController
-@CrossOrigin(origins = "${client.url}")
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/")
 @Validated
 public class RequestController {
@@ -45,6 +46,12 @@ public class RequestController {
 		log.debug("Getting the contacts by user_id: {}", user_id);
 		List<Long> contacts = contactsManager.getContacts(user_id);
 		return new ResponseEntity<>(contacts, HttpStatus.OK);
+	}
+
+	@GetMapping("/contacts")
+	public ResponseEntity<String> getTest() {
+		log.debug("GET a /api/contacts");	
+		return new ResponseEntity<>("Test GET to /api/contacts", HttpStatus.OK);
 	}
 }
 

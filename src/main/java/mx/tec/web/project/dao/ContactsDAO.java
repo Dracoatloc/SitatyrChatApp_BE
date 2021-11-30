@@ -1,6 +1,8 @@
 package mx.tec.web.project.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.Resource;
 
@@ -25,7 +27,15 @@ public class ContactsDAO {
 
     public List<Long> findContactsByUserId(Long id) {
         List<Long> contactIds = contactRepo.findContactsByUserId(id);
-        //List<ContactVO> contactDetails;
+        /*
+        List<ContactVO> contactDetails = new ArrayList<>();
+        for (final Long contactId: contactIds) {
+            Optional<Contact> contacto = contactRepo.findById(contactId);
+            if(contacto.isPresent()){
+                contactDetails.add(contactMapper.convertToVO(contacto.get()));
+            }
+        }
+        */
         return contactIds;
     }
     

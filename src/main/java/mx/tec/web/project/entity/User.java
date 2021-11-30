@@ -1,5 +1,6 @@
 package mx.tec.web.project.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
@@ -50,9 +52,9 @@ public class User {
 	@NotNull
 	private String status;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
-	@JoinTable(name = "Contacta", joinColumns = @JoinColumn(name = "user_id_Usuario"), inverseJoinColumns = @JoinColumn(name = "user_id_Contacto"))
-	private List<Contact> contacts;
+	//@JoinTable(name = "Contacta", joinColumns = @JoinColumn(name = "user_id_Usuario"), inverseJoinColumns = @JoinColumn(name = "user_id_Contacto"))
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Contacta> contacts = new ArrayList<>();
 	
 	/**
 	 * @return the User id

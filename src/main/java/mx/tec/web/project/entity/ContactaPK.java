@@ -3,22 +3,20 @@ package mx.tec.web.project.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class ContactaPK implements Serializable{
-    @Column(name = "user_id_Usuario")
+
     private Long userIdUsuario;
     
-    @Column(name = "user_id_Contacto")
     private Long userIdContacto;
+    
+    private ContactaPK() {}
 
-    private ContactaPK() {};
-
-    public ContactaPK(Long userId, Long contactId) {
-        this.userIdUsuario = userId;
-        this.userIdContacto = contactId;
+    public ContactaPK(Long userIdUsuario, Long userIdContacto) {
+        this.userIdUsuario = userIdUsuario;
+        this.userIdContacto = userIdContacto;
     }
     
     /**

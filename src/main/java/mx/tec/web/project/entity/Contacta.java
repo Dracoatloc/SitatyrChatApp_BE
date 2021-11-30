@@ -10,29 +10,32 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Contacta {
+    
     @EmbeddedId
     private ContactaPK id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("userIdUsuario")
-    private User usuario;
-
+    private User user;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("userIdContacto")
-    private Contact contacto;
+    private Contact contact;
 
     @Column(name = "date_added")
-    private Date date_added = new Date();
+    @NotNull
+    private Date date_added;
 
     private Contacta() {}
 
     public Contacta(User user, Contact contact) {
-        this.usuario = user;
-        this.contacto = contact;
-        this.id = new ContactaPK(user.getId(), contact.getId());
+        this.user = user;
+        this.contact = contact;
+        this.date_added = new Date();
     }
     
     /**
@@ -40,7 +43,7 @@ public class Contacta {
      * @return this.id
      */
     public ContactaPK getId() {
-        return this.id;
+        return new ContactaPK(this.user.getId(), this.contact.getId());
     }
     
     /**
@@ -54,30 +57,30 @@ public class Contacta {
      * Get the user
      * @return this.id
      */
-    public User getUsuario() {
-        return this.usuario;
+    public User getUser() {
+        return this.user;
     }
     
     /**
      * @param user the new user to set
      */
-    public void setUsuario(User user) {
-        this.usuario = user;
+    public void setUserIdUsuario(User user) {
+        this.user = user;
     }
 
     /**
      * Get the coontact of the table
      * @return this.id
      */
-    public Contact getContacto() {
-        return this.contacto;
+    public Contact getContact() {
+        return this.contact;
     }
     
     /**
      * @param contact the new contact to set
      */
     public void setId(Contact contact ) {
-        this.contacto = contact;
+        this.contact = contact;
     }
 
     @Override
@@ -90,11 +93,11 @@ public class Contacta {
         }
         
         Contacta that = (Contacta) o;
-        return Objects.equals(usuario, that.usuario) && Objects.equals(contacto, that.contacto);
+        return Objects.equals(user, that.user) && Objects.equals(contact, that.contact);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(usuario, contacto);
+        return Objects.hash(user, contact);
     }
 }

@@ -16,7 +16,7 @@ public class SitatyrChatAppBeApplication {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@Bean

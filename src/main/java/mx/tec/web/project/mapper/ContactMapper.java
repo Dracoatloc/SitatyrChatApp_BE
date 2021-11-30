@@ -39,7 +39,7 @@ public class ContactMapper {
      * @return Contact Value Object conversion
      */
     public List<ContactVO> convertToVOList(final List<Contact> contacts) {
-        final List<ContactVO> contactVOs = new ArrayList();
+        final List<ContactVO> contactVOs = new ArrayList<>();
         
         for (final Contact contact: contacts) {
             contactVOs.add(convertToVO(contact));
