@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import mx.tec.web.project.manager.ContactsManager;
 import mx.tec.web.project.manager.LoginManager;
+import mx.tec.web.project.manager.UserManager;
+import mx.tec.web.project.util.SecurityHelper;
 import mx.tec.web.project.vo.ContactVO;
 import mx.tec.web.project.vo.CredentialsVO;
 import mx.tec.web.project.vo.JsonWebTokenVO;
@@ -43,9 +45,17 @@ public class RequestController {
 	@Resource
 	private ContactsManager contactsManager;
 	
-	
+	/**
+	 * Referencce to the Login Manager
+	 */
 	@Resource
 	private LoginManager loginManager;
+	
+	/**
+	 * Referencce to the User Manager
+	 */
+	@Resource
+	private UserManager userManager;
 
 	/**
 	 * Get the contacts of a given user by the user_id
@@ -77,6 +87,33 @@ public class RequestController {
 		return ResponseEntity.ok(loginManager.authenticate(credentials));
 	}
 	
+	/**
+	 * Add a new user to the database
+	 * @param user User to be added to database
+	 * @return Response Entity with the created user and status code CREATED
+	 */
+	@PostMapping("/user/add")
+	public ResponseEntity<UserVO> addUser(@RequestBody UserVO user) {
+		log.info("User being created ", user.getUsername());
+		return new ResponseEntity<>(userManager.addUser(user), HttpStatus.CREATED);
+	}
+	
+	/**
+	 * Add a new contact to the database
+	 * @param contact Contact to be added to database
+	 * @return Response Entity with the created contact and status code CREATED
+	 */
+	@PostMapping("/contact/add")
+	public ResponseEntity<ContactVO> addContact(@RequestBody ContactVO contact) {
+		log.info("Contact being created ", contact.getUsername());
+		return new ResponseEntity<>(contactsManager.addContact(contact), HttpStatus.CREATED);
+	}
+	
+	/**
+	 * Handler to check if the credentials are valid
+	 * @param ae Authentication Exception which is handled
+	 * @return Response Entity with Exception message and status code UNAUTHORIZED
+	 */
 	@ExceptionHandler(AuthenticationException.class)
 	public ResponseEntity<String> onSecurityException (final AuthenticationException ae) {
 		log.error("Invalid Credentials ", ae);

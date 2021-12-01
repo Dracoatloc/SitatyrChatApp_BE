@@ -10,7 +10,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import mx.tec.web.project.entity.Contact;
+import mx.tec.web.project.entity.User;
 import mx.tec.web.project.vo.ContactVO;
+import mx.tec.web.project.vo.UserVO;
 
 /**
  * Mapper for the Contact Objects
@@ -56,4 +58,15 @@ public class ContactMapper {
     public Contact convertToEntity(final ContactVO contactvo) {
         return modelMapper.map(contactvo, Contact.class);
     }
+    
+    public Optional<ContactVO> convertToOptionalVO (final Optional<Contact> contact){
+		Optional<ContactVO> contactVO = Optional.empty();
+		
+		if (contact.isPresent()) {
+			contactVO = Optional.of(convertToVO(contact.get()));
+		}
+		
+		return contactVO;
+		
+	}
 }

@@ -28,6 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Component
 public class UserDAO implements UserDetailsService{
+	
 	/** Reference to User Repository*/
 	@Resource
 	private UserRepository userRepo;
@@ -36,6 +37,11 @@ public class UserDAO implements UserDetailsService{
 	@Resource
 	private UserMapper userMapper;
 	
+	/**
+	 * Loads the user by its username using user
+	 * @param username Username to be loaded
+	 * @return new User using User Details
+	 */
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername (final String username) {
@@ -54,9 +60,31 @@ public class UserDAO implements UserDetailsService{
 				grantedAuthorities);
 	}
 	
-	
+	/**
+	 * Method to find an specific user by its id
+	 * @param id Id of the user to be found
+	 * @return Optional User VO found by id 
+	 */
 	public Optional<UserVO> findById(final long id) {
 		return userMapper.convertToOptionalVO(userRepo.findById(id));
+	}
+	
+	/**
+	 * Method to find an specific user by its username
+	 * @param username Username of the user to be found
+	 * @return Optional User VO found by username
+	 */
+	public Optional<UserVO> findByUsername(String username) {
+		return userMapper.convertToOptionalVO(userRepo.findByUsername(username));
+	}
+	
+	/**
+	 * Method to insert user into the database
+	 * @param user User to insert in the database
+	 * @return User VO saved in the database
+	 */
+	public UserVO insert(final UserVO user) {
+		return userMapper.convertToVO(userRepo.save(userMapper.convertToEntity(user)));
 	}
 
 }

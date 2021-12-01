@@ -4,10 +4,12 @@ import java.util.Optional;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityExistsException;
 
 import org.springframework.stereotype.Service;
 
 import mx.tec.web.project.dao.ContactsDAO;
+import mx.tec.web.project.util.SecurityHelper;
 import mx.tec.web.project.vo.ContactVO;
 import mx.tec.web.project.vo.UserVO;
 
@@ -32,6 +34,15 @@ public class ContactsManager {
     public List<Long> getContacts(Long userId) {
         return contactsDAO.findContactsByUserId(userId);
     }
+    
+    public ContactVO addContact(final ContactVO contact) {
+		Optional<ContactVO> foundContact =  contactsDAO.findByUsername(contact.getUsername());
+		if(foundContact.isPresent()) {
+			throw new EntityExistsException("This contact already exists " + contact.getUsername());	
+		} else {
+			return  contactsDAO.insert(contact);
+		}
+	}
     
     
 }

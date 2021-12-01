@@ -25,7 +25,7 @@ public class JsonWebTokenUtil {
 	
 	public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 	
-	@Value ("${jwt.secret}")
+	@Value("${jwt.secret}")
 	private String secret;
 	
 	public String generateToken(UserDetails userDetails) {
@@ -43,11 +43,11 @@ public class JsonWebTokenUtil {
 	}
 	
 	public boolean validateToken(String token, UserDetails userDetails) {
-		final String username = getUsernameFormToken(token);
+		final String username = getUsernameFromToken(token);
 		return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
 	}
 	
-	public String getUsernameFormToken (String token) {
+	public String getUsernameFromToken (String token) {
 		return getClaimFromToken(token, Claims::getSubject);
 	}
 
