@@ -1,14 +1,30 @@
 package mx.tec.web.project.vo;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+/**
+ * Value Object implementation for internal manipulation of User
+ * @author Victor-Guerra
+ */
 public class UserVO {
 	private Long id;
+	@Email
+	@NotBlank(message = "Email is mandatory.")
 	private String email;
+	@NotBlank(message = "Password is mandatory.")
 	private String password;
+	@NotBlank(message = "Name is mandatory.")
 	private String name;
+	@NotBlank(message = "Username is mandatory.")
 	private String username;
 	private String userImage;
+	@NotBlank(message = "Date of Birth is mandatory.")
 	private String birthday;
+	@Digits(integer = 2, fraction = 0)
 	private int age;
+	@NotBlank(message = "Nationality is mandatory.")
 	private String nationality;
 	private String preferredMusic;
 	private String status;

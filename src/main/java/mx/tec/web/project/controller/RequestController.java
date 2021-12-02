@@ -1,16 +1,13 @@
 package mx.tec.web.project.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.security.sasl.AuthenticationException;
 import javax.validation.constraints.Min;
 
-import org.apache.catalina.connector.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -28,10 +25,15 @@ import mx.tec.web.project.manager.LoginManager;
 import mx.tec.web.project.manager.UserManager;
 import mx.tec.web.project.util.SecurityHelper;
 import mx.tec.web.project.vo.ContactVO;
+
 import mx.tec.web.project.vo.CredentialsVO;
 import mx.tec.web.project.vo.JsonWebTokenVO;
 import mx.tec.web.project.vo.UserVO;
 
+
+/**
+ * Controller Object for handling requests from the Front End
+ */
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/")
@@ -62,12 +64,13 @@ public class RequestController {
 	 * @param user_id
 	 * @return A list of Contact Value Objects
 	 */
-	@GetMapping("/contacts/{user_id}")
-	public ResponseEntity<List<Long>> getContacts(@PathVariable(value = "user_id") @Min(value = 0, message = "The user_id must be positive") Long user_id) {
-		log.debug("Getting the contacts by user_id: {}", user_id);
-		List<Long> contacts = contactsManager.getContacts(user_id);
+	@GetMapping("/contacts/{userId}")
+	public ResponseEntity<List<ContactVO>> getContacts(@PathVariable(value = "userId") @Min(value = 0, message = "The userId must be positive") Long userId) {
+		log.debug("Getting the contacts by userId: {}", userId);
+		List<ContactVO> contacts = contactsManager.getContacts(userId);
 		return new ResponseEntity<>(contacts, HttpStatus.OK);
 	}
+
 
 
 	@GetMapping("/contacts")
@@ -120,5 +123,6 @@ public class RequestController {
 		return new ResponseEntity<>(ae.getMessage(), HttpStatus.UNAUTHORIZED);
 
 	}
+
 }
 

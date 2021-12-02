@@ -12,6 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Entity Object for the database implementation of Contacta; the relationship between User and Contact
+ * @author Victor-Guerra
+ */
 @Entity
 public class Contacta {
     
@@ -28,14 +32,14 @@ public class Contacta {
 
     @Column(name = "date_added")
     @NotNull
-    private Date date_added;
+    private Date dateAdded;
 
     private Contacta() {}
 
     public Contacta(User user, Contact contact) {
         this.user = user;
         this.contact = contact;
-        this.date_added = new Date();
+        this.dateAdded = new Date();
     }
     
     /**
@@ -47,10 +51,10 @@ public class Contacta {
     }
     
     /**
-     * @param new_id the new id to set
+     * @param newId the new id to set
      */
-    public void setId(ContactaPK new_id) {
-        this.id = new_id;
+    public void setId(ContactaPK newId) {
+        this.id = newId;
     }
 
     /**
@@ -64,7 +68,7 @@ public class Contacta {
     /**
      * @param user the new user to set
      */
-    public void setUserIdUsuario(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -79,8 +83,23 @@ public class Contacta {
     /**
      * @param contact the new contact to set
      */
-    public void setId(Contact contact ) {
+    public void setContact(Contact contact ) {
         this.contact = contact;
+    }
+
+    /**
+     * Get the dateAdded of the table
+     * @return this.dateAdded
+     */
+    public Date getDateAdded() {
+        return this.dateAdded;
+    }
+    
+    /**
+     * @param date the new dateAdded to set
+     */
+    public void setDateAdded(Date date ) {
+        this.dateAdded = date;
     }
 
     @Override

@@ -2,7 +2,6 @@ package mx.tec.web.project.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.annotation.Resource;
 
@@ -16,7 +15,6 @@ import mx.tec.web.project.vo.UserVO;
 
 /**
  * Mapper for the Contact Objects
- * 
  * @author Victor-Guerra
  */
 @Component

@@ -13,7 +13,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import mx.tec.web.project.entity.Contact;
-import mx.tec.web.project.entity.User;
+
+import mx.tec.web.project.entity.Contacta;
+
 
 /**
  * Contacts JPA Repository
@@ -25,7 +27,7 @@ public interface ContactRepository extends JpaRepository<Contact, Long>{
      * Find a Contacts List based on a given User Id
      */
     @Query("FROM Contacta WHERE user_id = :id")
-    List<Long> findContactsByUserId(@Param("id") Long id);
+    List<Contacta> findContactsByUserId(@Param("id") Long id);
     
     Optional<Contact> findByUsername(String username);
 

@@ -5,6 +5,10 @@ import java.util.Objects;
 
 import javax.persistence.Embeddable;
 
+/**
+ * Ojbect for the combined primary key of the Contacta Table
+ * @author Victor-Guerra
+ */
 @Embeddable
 public class ContactaPK implements Serializable{
 
@@ -20,31 +24,31 @@ public class ContactaPK implements Serializable{
     }
     
     /**
-     * @return the UserId of the User
+     * @return the userIdUsuario of the User
      */
     public Long getUserIdUsuario() {
         return this.userIdUsuario;
     }
     
     /**
-     * @param user_id the UserId to set to the User
+     * @param userId the userIdUsuario to set to the User
      */
-    public void setUserIdUsuario(Long user_id) {
-        this.userIdUsuario = user_id;
+    public void setUserIdUsuario(Long userId) {
+        this.userIdUsuario = userId;
     }
 
     /**
-     * @return the UserId of the User
+     * @return the userIdContacto of the User
      */
     public Long getUserIdContacto() {
         return this.userIdContacto;
     }
     
     /**
-     * @param user_id the UserId to set to the User
+     * @param contactId the contactId to set to the User
      */
-    public void setUserIdContacto(Long contact_id) {
-        this.userIdContacto = contact_id;
+    public void setUserIdContacto(Long contactId) {
+        this.userIdContacto = contactId;
     }
     
     @Override

@@ -7,16 +7,15 @@ import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Entity Object for the database implementation of User
+ * @author Victor-Guerra
+ */
 @Entity
 public class User implements Serializable{
 	
@@ -65,7 +64,6 @@ public class User implements Serializable{
 	@NotNull
 	private String status;
 
-	//@JoinTable(name = "Contacta", joinColumns = @JoinColumn(name = "user_id_Usuario"), inverseJoinColumns = @JoinColumn(name = "user_id_Contacto"))
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Contacta> contacts = new ArrayList<>();
 	
@@ -265,6 +263,7 @@ public class User implements Serializable{
 	}
 
 	/**
+
 	 * Calculate the hashcode using all the paremeters
 	 * @return hash generated with the paremeters
 	 */
