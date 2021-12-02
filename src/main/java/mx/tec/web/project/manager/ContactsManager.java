@@ -9,7 +9,6 @@ import javax.persistence.EntityExistsException;
 import org.springframework.stereotype.Service;
 
 import mx.tec.web.project.dao.ContactsDAO;
-import mx.tec.web.project.util.SecurityHelper;
 import mx.tec.web.project.vo.ContactVO;
 
 /**

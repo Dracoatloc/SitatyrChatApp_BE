@@ -1,7 +1,6 @@
 package mx.tec.web.project.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.annotation.Resource;
 import javax.security.sasl.AuthenticationException;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 import mx.tec.web.project.manager.ContactsManager;
 import mx.tec.web.project.manager.LoginManager;
 import mx.tec.web.project.manager.UserManager;
-import mx.tec.web.project.util.SecurityHelper;
 import mx.tec.web.project.vo.ContactVO;
 
 import mx.tec.web.project.vo.CredentialsVO;
@@ -101,18 +99,18 @@ public class RequestController {
 	 */
 	@PostMapping("/user/add")
 	public ResponseEntity<UserVO> addUser(@RequestBody UserVO user) {
-		log.info("User being created ", user.getUsername());
+		log.info("User being created {}", user.getUsername());
 		return new ResponseEntity<>(userManager.addUser(user), HttpStatus.CREATED);
 	}
 	
 	/**
 	 * Add a new contact to the database
 	 * @param contact Contact to be added to database
-	 * @return Response Entity with the created contact and status code CREATED
+	 * @return Response Entity with the created conhttps://github.com/Purrum07/SitatyrChatApp_Teststact and status code CREATED
 	 */
 	@PostMapping("/contact/add")
 	public ResponseEntity<ContactVO> addContact(@RequestBody ContactVO contact) {
-		log.info("Contact being created ", contact.getUsername());
+		log.info("Contact being created {}", contact.getUsername());
 		return new ResponseEntity<>(contactsManager.addContact(contact), HttpStatus.CREATED);
 	}
 	

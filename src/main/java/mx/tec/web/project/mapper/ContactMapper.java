@@ -10,9 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import mx.tec.web.project.entity.Contact;
-import mx.tec.web.project.entity.User;
 import mx.tec.web.project.vo.ContactVO;
-import mx.tec.web.project.vo.UserVO;
 
 /**
  * Mapper for the Contact Objects

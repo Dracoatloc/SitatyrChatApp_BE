@@ -13,7 +13,6 @@ import mx.tec.web.project.entity.Contacta;
 import mx.tec.web.project.mapper.ContactMapper;
 import mx.tec.web.project.repository.ContactRepository;
 import mx.tec.web.project.vo.ContactVO;
-import mx.tec.web.project.vo.UserVO;
 
 /**
  * Implementation for the Contacts Data Access Object
