@@ -1,6 +1,7 @@
 package mx.tec.web.project.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.Resource;
 import javax.security.sasl.AuthenticationException;
@@ -28,6 +29,7 @@ import mx.tec.web.project.vo.ContactVO;
 
 import mx.tec.web.project.vo.CredentialsVO;
 import mx.tec.web.project.vo.JsonWebTokenVO;
+import mx.tec.web.project.vo.LoginResponse;
 import mx.tec.web.project.vo.UserVO;
 
 
@@ -58,6 +60,7 @@ public class RequestController {
 	 */
 	@Resource
 	private UserManager userManager;
+	
 
 	/**
 	 * Get the contacts of a given user by the user_id
@@ -71,8 +74,6 @@ public class RequestController {
 		return new ResponseEntity<>(contacts, HttpStatus.OK);
 	}
 
-
-
 	@GetMapping("/contacts")
 	public ResponseEntity<String> getTest() {
 		log.debug("GET a /api/contacts");	
@@ -85,9 +86,12 @@ public class RequestController {
 	 * @return Authentication of not
 	 */
 	@PostMapping("/user/login")
-	public ResponseEntity<JsonWebTokenVO> createAuthenticationToken(@RequestBody CredentialsVO credentials){
+	public ResponseEntity<LoginResponse> createAuthenticationToken(@RequestBody CredentialsVO credentials){
 		log.info("Authenticating user {}", credentials.getUsername());
-		return ResponseEntity.ok(loginManager.authenticate(credentials));
+		JsonWebTokenVO jsonWebT = loginManager.authenticate(credentials);
+		long userId = userManager.findUserIdByUsername(credentials.getUsername());
+		
+		return ResponseEntity.ok(new LoginResponse(jsonWebT, userId));
 	}
 	
 	/**
