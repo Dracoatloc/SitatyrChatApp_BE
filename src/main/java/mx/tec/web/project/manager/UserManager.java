@@ -40,4 +40,15 @@ public class UserManager {
 			return  userDAO.insert(user);
 		}
 	}
+	
+	public long findUserIdByUsername(String username) {
+		Optional<UserVO> foundUser =  userDAO.findByUsername(username);
+		
+		UserVO userFound = new UserVO();
+		if(foundUser.isPresent()) {
+			userFound = foundUser.get();
+		}
+		return userFound.getId();
+	}
+	
 }
