@@ -13,6 +13,7 @@ import mx.tec.web.project.entity.Contacta;
 import mx.tec.web.project.mapper.ContactMapper;
 import mx.tec.web.project.repository.ContactRepository;
 import mx.tec.web.project.vo.ContactVO;
+import mx.tec.web.project.vo.UserVO;
 
 /**
  * Implementation for the Contacts Data Access Object
@@ -54,5 +55,24 @@ public class ContactsDAO {
         }
         return contactDetails;
     }
+    
+    
+    /**
+	 * Method to find an specific contact by its username
+	 * @param username Username of the contact to be found
+	 * @return Optional Contact VO found by username
+	 */
+	public Optional<ContactVO> findByUsername(String username) {
+		return contactMapper.convertToOptionalVO(contactRepo.findByUsername(username));
+	}
+	
+	/**
+	 * Method to insert contact into the database
+	 * @param contact Contact to insert in the database
+	 * @return Contact VO saved in the database
+	 */
+	public ContactVO insert(final ContactVO contact) {
+		return contactMapper.convertToVO(contactRepo.save(contactMapper.convertToEntity(contact)));
+	}
     
 }

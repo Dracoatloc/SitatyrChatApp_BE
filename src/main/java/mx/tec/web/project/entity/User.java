@@ -1,5 +1,6 @@
 package mx.tec.web.project.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -16,43 +17,96 @@ import javax.validation.constraints.NotNull;
  * @author Victor-Guerra
  */
 @Entity
-public class User {
+public class User implements Serializable{
+	
+	/**User id*/
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
+	/**User email*/
 	@NotNull
 	private String email;
 	
+	/**User password*/
 	@NotNull
 	private String password;
 
+	/**User name*/
 	@NotNull
 	private String name;
 
+	/**User username*/
 	@NotNull
 	private String username;
 	
+	/**User userImage*/
 	@NotNull
 	private String userImage;
 
+	/**User birthDay*/
 	@NotNull
 	private String birthDay;
 
+	/**User age*/
 	@NotNull
 	private int age;
 
+	/**User nationality*/
 	@NotNull
 	private String nationality;
 
+	/**User preferredMusic*/
 	@NotNull
 	private String preferredMusic;
 
+	/**User status*/
 	@NotNull
 	private String status;
 
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Contacta> contacts = new ArrayList<>();
+	
+	/**
+	 * No arguments constructor
+	 */
+	public User() {
+		
+	}
+	
+	/**
+	 * Constructor including all the properties
+	 * @param id User id
+	 * @param email User email
+	 * @param password User password
+	 * @param name User name
+	 * @param username User username
+	 * @param userImage User user image
+	 * @param birthDay User  Birthday
+	 * @param age User age
+	 * @param nationality User nationality
+	 * @param preferredMusic User preferred Music
+	 * @param status User status
+	 * @param contacts user List of contacts
+	 */
+	public User(Long id, @NotNull String email, @NotNull String password, @NotNull String name,
+			@NotNull String username, @NotNull String userImage, @NotNull String birthDay, @NotNull int age,
+			@NotNull String nationality, @NotNull String preferredMusic, @NotNull String status,
+			List<Contacta> contacts) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.username = username;
+		this.userImage = userImage;
+		this.birthDay = birthDay;
+		this.age = age;
+		this.nationality = nationality;
+		this.preferredMusic = preferredMusic;
+		this.status = status;
+		this.contacts = contacts;
+	}
 	
 	/**
 	 * @return the User id
@@ -209,8 +263,9 @@ public class User {
 	}
 
 	/**
-	 * Obtain the Hash code for the Object
-	 * @return int hash
+
+	 * Calculate the hashcode using all the paremeters
+	 * @return hash generated with the paremeters
 	 */
 	@Override
 	public int hashCode() {
@@ -219,7 +274,9 @@ public class User {
 	}
 
 	/**
-	 * Compare two User Objects
+	 * Calculate the equiality using all the paremeters
+	 * @param obj the other object with which is going to be compared
+	 * @return true or false depending on the result of the comparison
 	 */
 	@Override
 	public boolean equals(Object obj) {
