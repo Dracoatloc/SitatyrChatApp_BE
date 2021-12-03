@@ -12,12 +12,22 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ContactaPK implements Serializable{
 
+	/** Contact userId */
     private Long userIdUsuario;
-    
+
+	/** Contact contactId */
     private Long userIdContacto;
     
+    /**
+     * No arguments constructor
+     */
     private ContactaPK() {}
 
+    /**
+     * Constructor including all the properties
+     * @param userIdUsuario User id of user
+     * @param userIdContacto Contact id of contact
+     */
     public ContactaPK(Long userIdUsuario, Long userIdContacto) {
         this.userIdUsuario = userIdUsuario;
         this.userIdContacto = userIdContacto;
@@ -51,6 +61,11 @@ public class ContactaPK implements Serializable{
         this.userIdContacto = contactId;
     }
     
+    /**
+	 * Calculate the equiality using all the paremeters
+	 * @param obj the other object with which is going to be compared
+	 * @return true or false depending on the result of the comparison
+	 */
     @Override
     public boolean equals(Object o) {
         if(this == o) {
@@ -64,6 +79,10 @@ public class ContactaPK implements Serializable{
         return Objects.equals(userIdUsuario, that.userIdUsuario) && Objects.equals(userIdContacto, that.userIdContacto); 
     }
     
+    /**
+	 * Calculate the hashcode using all the paremeters
+	 * @return hash generated with the paremeters
+	 */
     @Override
     public int hashCode() {
         return Objects.hash(userIdUsuario, userIdContacto);

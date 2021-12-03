@@ -13,6 +13,12 @@ import mx.tec.web.project.entity.User;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
+	
+	/**
+	 * Find User by its username
+	 * @param username User username used to find
+	 * @return Optional User found
+	 */
 	Optional<User> findByUsername(String username);
 
 }

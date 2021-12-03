@@ -20,7 +20,8 @@ import mx.tec.web.project.vo.ContactVO;
  */
 @Component("jpa")
 public class ContactsDAO {
-    /**
+    
+	/**
      * A reference to the Contacts Repository
      */
     @Resource
@@ -35,7 +36,7 @@ public class ContactsDAO {
     /**
      * Finds Contact Details based on the User id provided
      * @param id
-     * @return List<ContactVO> contactDetails ; the list of the users' contacts
+     * @return List<ContactVO> contactDetails ; the list of the user's contacts
      */
     public List<ContactVO> findContactsByUserId(Long id) {
         List<Contacta> contactaObjects = contactRepo.findContactsByUserId(id);

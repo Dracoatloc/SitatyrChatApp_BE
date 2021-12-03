@@ -1,5 +1,6 @@
 package mx.tec.web.project.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,35 +16,49 @@ import javax.validation.constraints.NotNull;
  * @author Victor-Guerra
  */
 @Entity
-public class Contact {
+public class Contact implements Serializable{
+	
+	/** UID */
+	private static final long serialVersionUID = -6709122001558275465L;
+
+	/** Contact id*/
 	@Id
 	@GeneratedValue
 	private Long id;
 	
+	/** Contact email*/
 	@NotNull
 	private String email;
 	
+	/** Contact name*/
 	@NotNull
 	private String name;
 
+	/** Contact username*/
 	@NotNull
 	private String username;
 	
+	/** Contact userImage*/
 	@NotNull
 	private String userImage;
 
+	/** Contact birthday*/
 	@NotNull
 	private String birthDay;
 
+	/** Contact age*/
 	@NotNull
 	private int age;
 
+	/** Contact nationality*/
 	@NotNull
 	private String nationality;
 
+	/** Contact preferred music*/
 	@NotNull
 	private String preferredMusic;
 
+	/** Contact status*/
 	@NotNull
 	private String status;
 

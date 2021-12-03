@@ -71,7 +71,11 @@ public class RequestController {
 		List<ContactVO> contacts = contactsManager.getContacts(userId);
 		return new ResponseEntity<>(contacts, HttpStatus.OK);
 	}
-
+	
+	/**
+	 * Get all the contacts from the database
+	 * @return A message indicating correct access
+	 */
 	@GetMapping("/contacts")
 	public ResponseEntity<String> getTest() {
 		log.debug("GET a /api/contacts");	

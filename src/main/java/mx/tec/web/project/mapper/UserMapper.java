@@ -21,6 +21,10 @@ import mx.tec.web.project.vo.UserVO;
  */
 @Component
 public class UserMapper {
+	
+	/**
+	 * A reference to Model Mapper
+	 */
 	@Resource
 	private ModelMapper modelMapper;
 	
@@ -33,6 +37,11 @@ public class UserMapper {
 		return modelMapper.map(user, UserVO.class);
 	}
 	
+	/**
+	 * Convert List of User Entity to List of UserVO
+	 * @param users List of user entities to convert
+	 * @return List of UserVO conversion
+	 */
 	public List<UserVO> convertToVOList (final List<User> users){
 		final List<UserVO> usersVO = new ArrayList<>();
 		
@@ -52,7 +61,11 @@ public class UserMapper {
 		return modelMapper.map(userVO, User.class);
 	}
 	
-	
+	/**
+	 * Convert from an Optional User Entity to Optional User VO
+	 * @param user Optional User Entity to convert
+	 * @return Optional User VO conversion
+	 */
 	public Optional<UserVO> convertToOptionalVO (final Optional<User> user){
 		Optional<UserVO> userVO = Optional.empty();
 		
