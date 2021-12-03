@@ -11,29 +11,62 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author Victor-Guerra
  */
 public class ContactVO {
+	
+	/** ContactVO id*/
 	private Long id;
+
+	/** ContactVO email*/
 	@Email
 	@NotBlank(message = "Email is mandatory.")
 	private String email;
+	
+	/** ContactVO name*/
 	@NotBlank(message = "Name is mandatory")
 	private String name;
+	
+	/** ContactVO username*/
 	@NotBlank(message = "Username is mandatory.")
 	private String username;
 
+	/** ContactVO userImage*/
 	private String userImage;
+	
+	/** ContactVO birthday*/
 	@DateTimeFormat
 	@NotBlank(message = "Date of Birth is mandatory.")
 	private String birthday;
+	
+	/** ContactVO age*/
 	@Digits(integer = 2, fraction = 0)
 	private int age;
+	
+	/** ContactVO nationality*/
 	@NotBlank(message = "Nationality is mandatory.")
 	private String nationality;
 
+	/** ContactVO preferredMusic*/
 	private String preferredMusic;
 
+	/** ContactVO status*/
 	private String status;
 	
+	/**
+	 * No arguments constructor
+	 */
 	public ContactVO () {}
+	
+	/**
+	 * All arguments constructor
+	 * @param id ContactVO id
+	 * @param email ContactVO email
+	 * @param name ContactVO name
+	 * @param username ContactVO username
+	 * @param userImage ContactVO userImage
+	 * @param birthday ContactVO birthday
+	 * @param nationality ContactVO nationality
+	 * @param preferredMusic ContactVO preferred music
+	 * @param status ContactVO status
+	 */
 	public ContactVO (Long id, 
 				   String email, 
 				   String name, 

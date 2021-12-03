@@ -30,12 +30,21 @@ import mx.tec.web.project.util.JsonWebTokenUtil;
 @Component
 public class JsonWebTokenRequestFilter extends OncePerRequestFilter {
 	
+	/**
+	 * A reference to Login Manager
+	 */
 	@Autowired
 	private LoginManager loginManager;
 	
+	/**
+	 * A reference to JsonWebTokenUtil
+	 */
 	@Autowired
 	private JsonWebTokenUtil tokenUtil;
 	
+	/**
+	 * Method to create the filter, checking if the request has the authorization token nedeed to proceed
+	 */
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {

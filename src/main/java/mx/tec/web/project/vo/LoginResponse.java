@@ -8,14 +8,27 @@ package mx.tec.web.project.vo;
  *
  */
 public class LoginResponse {
-private static final long serialVersionUID = 4679985845204576425L;
 	
+	/** UID */
+	private static final long serialVersionUID = 4679985845204576425L;
+	
+	/** LoginResponse token*/
 	private JsonWebTokenVO token;
+
+	/** LoginResponse userId*/
 	private long id;
 	
+	/**
+	 * No arguments constructor
+	 */
 	public LoginResponse() {
 	}
 	
+	/**
+	 * All arguments constructor
+	 * @param token Login response user token
+	 * @param id Login response user id
+	 */
 	public LoginResponse(JsonWebTokenVO token, long id) {
 		super();
 		this.token = token;

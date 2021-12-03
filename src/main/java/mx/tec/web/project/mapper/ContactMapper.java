@@ -18,7 +18,8 @@ import mx.tec.web.project.vo.ContactVO;
  */
 @Component
 public class ContactMapper {
-    /**
+    
+	/**
      * Reference to Model Mapper
      */
     @Resource
@@ -32,6 +33,7 @@ public class ContactMapper {
     public ContactVO convertToVO(final Contact contact) {
         return modelMapper.map(contact, ContactVO.class);
     }
+    
     /**
      * Convert from a Contact Entity to Contact Value Object
      * @param contact Contact Entity to convert
@@ -56,6 +58,11 @@ public class ContactMapper {
         return modelMapper.map(contactvo, Contact.class);
     }
     
+    /**
+     * Convert from a Optional Contact Entity to a Contact VO 
+     * @param contact Contact Entity to convert
+     * @return Contact VO conversion
+     */
     public Optional<ContactVO> convertToOptionalVO (final Optional<Contact> contact){
 		Optional<ContactVO> contactVO = Optional.empty();
 		

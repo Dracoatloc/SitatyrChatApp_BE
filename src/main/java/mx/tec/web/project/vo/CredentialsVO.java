@@ -11,14 +11,26 @@ import java.io.Serializable;
  */
 public class CredentialsVO implements Serializable {
 
+	/** UID */
 	private static final long serialVersionUID = 4679985845204576425L;
 	
+	/** Credentials username */
 	private String username;
+	
+	/** Credentials password */
 	private String password;
 	
+	/**
+	 * No arguments constructor
+	 */
 	public CredentialsVO() {
 	}
 	
+	/**
+	 * All arguments constructor
+	 * @param username credentials username
+	 * @param password credentials password
+	 */
 	public CredentialsVO (final String username, final String password) {
 		this.setPassword(password);
 		this.setUsername(username);

@@ -9,27 +9,66 @@ import javax.validation.constraints.NotBlank;
  * @author Victor-Guerra
  */
 public class UserVO {
+	
+	/** UserVO id*/
 	private Long id;
+	
+	/** UserVO email*/
 	@Email
 	@NotBlank(message = "Email is mandatory.")
 	private String email;
+	
+	/** UserVO password*/
 	@NotBlank(message = "Password is mandatory.")
 	private String password;
+	
+	/** UserVO name*/
 	@NotBlank(message = "Name is mandatory.")
 	private String name;
+	
+	/** UserVO username*/
 	@NotBlank(message = "Username is mandatory.")
 	private String username;
+	
+	/** UserVO userImage*/
 	private String userImage;
+	
+	/** UserVO birthday*/
 	@NotBlank(message = "Date of Birth is mandatory.")
 	private String birthday;
+	
+	/** UserVO age*/
 	@Digits(integer = 2, fraction = 0)
 	private int age;
+	
+	/** UserVO nationality*/
 	@NotBlank(message = "Nationality is mandatory.")
 	private String nationality;
+	
+	/** UserVO preferred music*/
 	private String preferredMusic;
+	
+	/** UserVO status*/
 	private String status;
 	
+	/**
+	 * No arguments constructor
+	 */
 	public UserVO () {}
+	
+	/**
+	 * All arguments constructor
+	 * @param id User id
+	 * @param email User email
+	 * @param password User password
+	 * @param name User name
+	 * @param username User username
+	 * @param userImage User user image
+	 * @param birthday User Birthday
+	 * @param nationality User nationality
+	 * @param preferredMusic User preferred music
+	 * @param status User status
+	 */
 	public UserVO (Long id, 
 				   String email, 
 				   String password, 

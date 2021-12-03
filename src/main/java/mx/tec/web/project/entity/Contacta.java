@@ -1,6 +1,7 @@
 package mx.tec.web.project.entity;
 
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
@@ -17,25 +18,40 @@ import javax.validation.constraints.NotNull;
  * @author Victor-Guerra
  */
 @Entity
-public class Contacta {
+public class Contacta implements Serializable{
     
-    @EmbeddedId
+	/** UID */
+	private static final long serialVersionUID = 1405556686626033976L;
+
+	/** Contacta id*/
+	@EmbeddedId
     private ContactaPK id;
 
+	/** Contacta User*/
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("userIdUsuario")
     private User user;
     
+    /** Contacta Contact*/
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("userIdContacto")
     private Contact contact;
 
+    /** Contacta date*/
     @Column(name = "date_added")
     @NotNull
     private Date dateAdded;
 
+    /**
+     * No arguments constructor 
+     */
     private Contacta() {}
 
+    /**
+     * 
+     * @param user
+     * @param contact
+     */
     public Contacta(User user, Contact contact) {
         this.user = user;
         this.contact = contact;
@@ -102,6 +118,11 @@ public class Contacta {
         this.dateAdded = date;
     }
 
+    /**
+	 * Calculate the equiality using all the paremeters
+	 * @param obj the other object with which is going to be compared
+	 * @return true or false depending on the result of the comparison
+	 */
     @Override
     public boolean equals(Object o) {
         if(this == o) {
@@ -115,6 +136,10 @@ public class Contacta {
         return Objects.equals(user, that.user) && Objects.equals(contact, that.contact);
     }
     
+    /**
+	 * Calculate the hashcode using all the paremeters
+	 * @return hash generated with the paremeters
+	 */
     @Override
     public int hashCode() {
         return Objects.hash(user, contact);

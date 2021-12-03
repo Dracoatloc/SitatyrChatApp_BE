@@ -19,6 +19,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class User implements Serializable{
 	
+	/** UID */
+	private static final long serialVersionUID = 2099079142774482935L;
+
 	/**User id*/
 	@Id
 	@GeneratedValue
@@ -263,7 +266,6 @@ public class User implements Serializable{
 	}
 
 	/**
-
 	 * Calculate the hashcode using all the paremeters
 	 * @return hash generated with the paremeters
 	 */

@@ -30,17 +30,29 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
+	/**
+	 * A reference to User Details Service
+	 */
 	@Autowired
 	private UserDetailsService userService;
 	
+	/**
+	 * A reference to JsonWebTokenRequestFilter
+	 */
 	@Lazy
 	@Autowired
 	private JsonWebTokenRequestFilter requestFilter;
 	
+	/**
+	 * A reference to JsonWebAuthenticationEntryPoint
+	 */
 	@Autowired
 	private JsonWebAuthenticationEntryPoint jsnWbAthnntctnEntrPnt;
 	
-	
+	/**
+	 * Configurates the initial route that can be accesed
+	 * @param httpSecurity to set configuration
+	 */
 	@Override
 	protected void configure(final HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.csrf().disable()
@@ -54,17 +66,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		httpSecurity.addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 	
+	/**
+	 * Method to create Bcrypt enconder
+	 * @return new BCryptPasswordEncoder
+	 */
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
+	/**
+	 * Method to set Authentication Manager configuration
+	 * @return bean for Authentication Manager
+	 */
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
 	
+	/**
+	 * Configures Authentication manager with user details and a password encoder
+	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
